@@ -1,0 +1,73 @@
+html,
+      body {
+        font-family: "Lato", sans-serif;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        height: 100%;
+        /*width:100px;*/
+        position: relative;
+      }
+
+      input {
+        font-size: 12px;
+      }
+
+      h1 {
+        color: white;
+        font-size: 45px;
+        font-weight: lighter;
+        margin: 10px 0 15px 0;
+        text-align: center;
+      }
+
+      #hide-listings,
+      #show-listings {
+        margin-left: 25px;
+        margin-right: 10px;
+        width: 85%;
+        font-weight: bolder;
+        padding: 5px 25px 5px 10px;
+        background-color: white;
+      }
+
+      #map {
+        bottom:0px;
+        height: 100%;
+        left: 92px;
+        margin-left: 10%;
+        position: absolute;
+        right: 0px;
+      }
+
+      #searchDrop,#searchBtn {
+        background-color: white;
+      }
+      #searchDrop {
+        margin-left: 22px;
+      }
+
+      .options-box {
+        background: #000;
+        height: 100%;
+        line-height: 35px;
+        padding: 10px 10px 30px 10px;
+        text-align: left;
+        width: 15%;
+      }
+      .maptitle {
+        width: 100%;
+        height: 60px;
+        border: 1px solid grey;
+        background-color: black;
+      }
+      #searchList {
+        color: white;
+      }
+
+      .listbox {
+        color: white;
+      }

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:200,600" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script type="text/javascript" src="js/components/knockout-3.4.2.js"></script>
+  
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  </head>
+  <body>
+    <div class="maptitle">
+        <h1>These are Radhika's Fav Places</h1>        
+    </div>
+    <div class="container">
+      <div class="options-box">
+        <div class="headings">
+           <h1>Select Your Places</h1>        
+        </div>
+        <div class="inp_btn">
+           <select id="searchDrop" data-bind="options: location,optionsText: 'title',value: selected">
+          </select> 
+          <button id="searchBtn" type="search" value"search" data-bind="click: cityFilter">Search</button>
+          <input id="hide-listings" type="button" value="HIDE PLACES">
+          <ul id="searchList" data-bind="foreach: location,visible: hideCities">
+
+              <li data-bind="">
+                <a href="" id="listSelect" class="listbox" data-bind="text: $data.title,click: $parent.citySelect">
+                 </a>
+              </li> 
+          </ul> 
+          <h4 class='listbox' data-bind="visible: showSubset">Your Hotel and Parks are:</h4>
+          <ul data-bind="visible: showSubset,foreach: subsets" id="filtered">
+            <li>
+                <a href="" data-bind="text: $data" class='listbox'>
+                </a>
+            </li>
+          </ul>
+          <h5 id="hidden" style="color:black;" class="city"></h5>
+        </div>
+      </div>
+
+      <div id="map"></div>
+    </div>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/mapper.js"></script>
+    <script type="text/javascript" src="js/components/jquery.min.js"></script>
+    <script async defer
+        src=
+        "https://maps.googleapis.com/maps/api/js?key=AIzaSyAV9ytHgTzEF3aEV19OymQdMicWr02_FTI&v=3&callback=initMap">
+    </script>
+     <script async defer type="text/javascript" src="js/wiki.js"></script>
+  </body>
+</html>

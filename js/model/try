@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- Title for Website -->
+<title>Radhika Neighbourhood Map</title>
+<!-- Meta Tags -->
+<meta name="viewport" content="width=device-width,initial-scale=1">
+	<!-- CSS Files -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+
+<!-- JS INCLUDE Files -->
+<script type="text/javascript" src="components/knockout-3.4.2.js"></script>
+<script type="text/javascript" src="model/app-model.js"></script>
+<!-- End of Head Section -->
+</head>
+<!-- Main Body starts -->
+<body>
+	<div class="container row">
+		<div id="menu" class="col-sm-4">
+			<h1 class='map_title'>Radhika's Map</h1>
+
+			<!-- Search Location with Dropdown -->
+			<label>Seach Your Location:</label><br/>
+			<input type="dropdown" class="dropdown" value="Location">
+			<button class="glyphicon-search" type="search">Search</button>
+
+			<!-- List of the Neighborhood -->
+			<label class="loc_title">Your Neighborhood Locations are:</label><br/>			
+			<ul data-bind="foreach: locations">
+				<li data-bind="$data"></li>
+			</ul>
+		</div>
+		<div id="mapArea" class="col-sm-8 text-center">
+			<div id="mTitle">
+				<h1 class='map_foryou'>Here are your Top  Hotel and Park for you :)</h1>		
+			</div>
+			<div id="map"></div>
+		</div>
+	</div>
+	<!-- JS Files -->
+	<script>
+		var map;
+
+		function initMap()
+		{
+			map = new google.maps.Map(document.getElementById('map'), {
+	        center: {lat: 40.7413549, lng: -73.9980244},
+		    zoom: 13
+		    });	
+		}
+	</script>	
+	 <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAV9ytHgTzEF3aEV19OymQdMicWr02_FTI&v=3&callback=initMap">
+    </script>
+</body>
+</html>
