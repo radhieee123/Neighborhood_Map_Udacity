@@ -4,48 +4,80 @@
   <meta charset="utf-8">
 
   <link href="https://fonts.googleapis.com/css?family=Lato:200,600" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <script type="text/javascript" src="js/components/knockout-3.4.2.js"></script>
   
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   </head>
   <body>
-    <div class="maptitle">
-        <h1>These are Radhika's Fav Places</h1>        
+    <div class="maptitle">'
+        <h1 class="mainHead">These are Radhika's Fav Places</h1>     
     </div>
-    <div class="container">
-      <div class="options-box">
-        <div class="headings">
-           <h1>Select Your Places</h1>        
+    
+    <div class="contain">
+       <button type="button" id="expand"class="btn btn-warning">></button> 
+      <div class="options-box row">
+        <div class="headings col-xs-12">
+                  <div class="col-xs-10"></div>
+                  <div id="navBtn" class="col-xs-2">
+                  <button type="button" id="hideDetails"class="btn btn-success"><</button>
+                  </div>
+           <h1 class="selecthead">Select Your Places</h1>        
         </div>
-        <div class="inp_btn">
-           <select id="searchDrop" data-bind="options: location,optionsText: 'title',value: selected">
-          </select> 
-          <button id="searchBtn" type="search" value"search" data-bind="click: cityFilter">Search</button>
-          <input id="hide-listings" type="button" value="HIDE PLACES">
-          <ul id="searchList" data-bind="foreach: location,visible: hideCities">
+        <div class="inp_btn" class="row">
 
-              <li data-bind="">
-                <a href="" id="listSelect" class="listbox" data-bind="text: $data.title,click: $parent.citySelect">
+           <select id="searchDrop" class="dropdown"data-bind="options: location,optionsText: 'title',value: selected">
+          </select> 
+
+          <button id="searchBtn" type="search" class="btn btn-warning" value"search" data-bind="click: cityFilter">Search</button>
+
+          <input id="hide-listings" class="btn btn-warning"type="button" value="HIDE PLACES">
+
+
+          <ul id="searchList" class="list-group"data-bind="foreach: location,visible: hideCities">
+              <li class="list-group-item"data-bind="">
+                <a href="" id="listSelect"  data-bind="text: $data.title,click: $parent.citySelect">
                  </a>
               </li> 
           </ul> 
-          <h4 class='listbox' data-bind="visible: showSubset">Your Hotel and Parks are:</h4>
-          <ul data-bind="visible: showSubset,foreach: subsets" id="filtered">
-            <li>
-                <a href="" data-bind="text: $data" class='listbox'>
-                </a>
+
+        </div>
+          <h4 class='listhead' data-bind="visible: showSubset">Your Hotel and Parks are:</h4>
+          <ul class="list-group" data-bind="visible: showSubset,foreach: subsets" id="filtered">
+            <li data-bind="text: $data" class="list-group-item">
             </li>
           </ul>
           <h5 id="hidden" style="color:black;" class="city"></h5>
         </div>
-      </div>
+      
 
       <div id="map"></div>
     </div>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/mapper.js"></script>
     <script type="text/javascript" src="js/components/jquery.min.js"></script>
+
+    <script>
+
+      $('document').ready(function(){
+        $("#expand").hide();
+      });
+      $("#hideDetails").on('click',function(){
+        $(".options-box").hide();
+        $("#expand").show();
+        $("#map").css('margin-left','0px');
+        $("#map").css('left','32px');
+      });
+      $("#expand").on('click',function(){
+        $(".options-box").show();
+        $("#expand").hide();
+        $("#map").css('margin-left','11.5%');
+        $("#map").css('left','92px');
+      });
+
+    </script>
     <script async defer
         src=
         "https://maps.googleapis.com/maps/api/js?key=AIzaSyAV9ytHgTzEF3aEV19OymQdMicWr02_FTI&v=3&callback=initMap">
