@@ -28,15 +28,15 @@
         </div>
         <div class="inp_btn" class="row">
 
-           <select id="searchDrop" class="dropdown"data-bind="options: location,optionsText: 'title',value: selected">
+           <select id="searchDrop" class="dropdown" data-bind="options: location,optionsText: 'title',value: selected">
           </select> 
 
           <button id="searchBtn" type="search" class="btn btn-warning" value"search" data-bind="click: cityFilter">Search</button>
 
-          <input id="hide-listings" class="btn btn-warning"type="button" value="HIDE PLACES">
+          <input id="hide-listings" class="btn btn-warning" data-bind="click: hideListings" type="button" value="HIDE PLACES">
 
 
-          <ul id="searchList" class="list-group"data-bind="foreach: location,visible: hideCities">
+          <ul id="searchList" class="list-group" data-bind="foreach: location,visible: hideCities">
               <li class="list-group-item"data-bind="">
                 <a href="" id="listSelect"  data-bind="text: $data.title,click: $parent.citySelect">
                  </a>

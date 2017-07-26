@@ -114,10 +114,14 @@ function initMap() {
         }
     ];
 
+
     var largeInfowindow = new google.maps.InfoWindow();
-    document.getElementById('hide-listings').addEventListener('click', hideListings);
+
+
+
+   /* document.getElementById('hide-listings').addEventListener('click', hideListings);
     document.getElementById('searchBtn').addEventListener('click', showPlaces);
-    document.getElementById('searchList').addEventListener('click', showPlaces);
+    document.getElementById('searchList').addEventListener('click', showPlaces);*/
 
     markers = [];
     var bounds = new google.maps.LatLngBounds();
@@ -132,10 +136,21 @@ function initMap() {
             position: sloc,
             title: stitle,
             animation: google.maps.Animation.DROP,
-            id: i
+            id: i,
+            icon: {
+            url: 'img/radhi.png',
+            size: new google.maps.Size(25, 40),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(12.5, 40)
+            },
+          shape: {
+            coords: [1,25,-40,-25,1],
+            type: 'poly'
+          }  
         });
         // Push the marker to our array of markers.
         markers.push(marker);
+
         // Create an onclick event to open an infowindow at each marker.
         marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
@@ -157,11 +172,10 @@ function initMap() {
 function populateInfoWindow(marker, infowindow) {
     if (infowindow.marker != marker) {
         infowindow.marker = marker;
-
+        map.setCenter(marker.getPosition());
         //For wiki links:
         var $body = $('body');
         var cityStr = marker.title;
-
         //var cityStr=$("#hidden").val();
         var $wikiElem = $('#wikipedia-links');
         // clear out old data before new request
@@ -207,51 +221,3 @@ function populateInfoWindow(marker, infowindow) {
     }
 }
 
-function showPlaces() {
-    //Resetting the markers array to null
-    markers = [];
-
-    /*Hidden variable in index1.html which stores the name of clicked place*/
-    var selectedOpt = document.getElementById("hidden").innerHTML;
-    var largeInfowindow = new google.maps.InfoWindow();
-    var bounds = new google.maps.LatLngBounds();
-    for (var i = 0; i < locations.length; i++) {
-        if (selectedOpt === locations[i].title) {
-            for (var j = 0; j < 2; j++) {
-                var stitle = locations[i].subset[j].title;
-                var sloc = locations[i].subset[j].loc;
-
-                //console.log(selectedOpt);
-                console.log(stitle);
-                console.log(sloc);
-                var marker = new google.maps.Marker({
-                    position: sloc,
-                    title: stitle,
-                    animation: google.maps.Animation.DROP,
-                    id: j
-                });
-                // Push the marker to our array of markers.
-                markers.push(marker);
-                // Create an onclick event to open an infowindow at each marker.
-                marker.addListener('click', function() {
-                    populateInfoWindow(this, largeInfowindow);
-                });
-            }
-        }
-    }
-    console.log(markers.length);
-
-
-    for (i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
-        bounds.extend(markers[i].position);
-    }
-    map.fitBounds(bounds);
-}
-// This function will loop through the listings and hide them all.
-function hideListings() {
-    for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(null);
-    }
-    map.fitBounds(null);
-}

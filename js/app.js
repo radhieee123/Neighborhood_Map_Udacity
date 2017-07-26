@@ -111,7 +111,6 @@
          var sTITLE = this.selected().title;
          console.log(sTITLE);
          document.getElementById("hidden").innerHTML = sTITLE;
-
          //Clear array with the previous subsets displayed
          this.subsets([]);
          showSubset(true);
@@ -127,28 +126,65 @@
          }
          showSubset(true);
          hideCities(false);
+         self.showPlaces();
      };
      self.citySelect = function(title) {
          var listTITLE = title.title;
+         self.selected(title);
          console.log("In city sleect" + title.title);
-         document.getElementById("hidden").innerHTML = listTITLE;
-         //self.cityFilter();
-
-         self.subsets([]);
-         showSubset(true);
-         hideCities(false);
-         for (var i = 0; i < 5; i++) {
-             //console.log("Hello I am hreeeee");
-             if (locations[i].title === listTITLE) {
-                 for (var j = 0; j < 2; j++) {
-                     console.log("We passed in city select");
-                     self.subsets.push(locations[i].subset[j].title);
-                 }
-             }
-         }
-         showSubset(true);
-         hideCities(false);
+         self.cityFilter();
      };
+
+
+
+         self.showPlaces=function () {
+            //Resetting the markers array to null
+            markers = [];
+
+            /*Hidden variable in index1.html which stores the name of clicked place*/
+            var selectedOpt = document.getElementById("hidden").innerHTML;
+            var largeInfowindow = new google.maps.InfoWindow();
+            var bounds = new google.maps.LatLngBounds();
+            for (var i = 0; i < locations.length; i++) {
+                if (selectedOpt === locations[i].title) {
+                    for (var j = 0; j < 2; j++) {
+                        var stitle = locations[i].subset[j].title;
+                        var sloc = locations[i].subset[j].loc;
+
+                        //console.log(selectedOpt);
+                        console.log(stitle);
+                        console.log(sloc);
+                        var marker = new google.maps.Marker({
+                            position: sloc,
+                            title: stitle,
+                            animation: google.maps.Animation.DROP,
+                            id: j
+                        });
+                        // Push the marker to our array of markers.
+                        markers.push(marker);
+                        // Create an onclick event to open an infowindow at each marker.
+                        marker.addListener('click', function() {
+                            populateInfoWindow(this, largeInfowindow);
+                        });
+                    }
+                }
+            }
+            console.log(markers.length);
+
+
+            for (i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+                bounds.extend(markers[i].position);
+            }
+            map.fitBounds(bounds);
+        }
+// This function will loop through the listings and hide them all.
+        self.hideListings=function() {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+            map.fitBounds(null);
+        }
 
  };
  ko.applyBindings(new ViewModel());
