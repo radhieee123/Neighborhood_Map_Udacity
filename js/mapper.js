@@ -123,7 +123,7 @@ function initMap() {
     document.getElementById('searchBtn').addEventListener('click', showPlaces);
     document.getElementById('searchList').addEventListener('click', showPlaces);*/
 
-    markers = [];
+   //   markers = [];
     var bounds = new google.maps.LatLngBounds();
     for (var i = 0; i < locations.length; i++) {
         var stitle = locations[i].title;
