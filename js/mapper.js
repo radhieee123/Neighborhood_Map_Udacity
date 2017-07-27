@@ -114,16 +114,10 @@ function initMap() {
         }
     ];
 
+    if(google && google.maps){
+    console.log('Google maps loaded');
 
     var largeInfowindow = new google.maps.InfoWindow();
-
-
-
-   /* document.getElementById('hide-listings').addEventListener('click', hideListings);
-    document.getElementById('searchBtn').addEventListener('click', showPlaces);
-    document.getElementById('searchList').addEventListener('click', showPlaces);*/
-
-   //   markers = [];
     var bounds = new google.maps.LatLngBounds();
     for (var i = 0; i < locations.length; i++) {
         var stitle = locations[i].title;
@@ -138,15 +132,15 @@ function initMap() {
             animation: google.maps.Animation.DROP,
             id: i,
             icon: {
-            url: 'img/radhi.png',
-            size: new google.maps.Size(25, 40),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(12.5, 40)
+                url: 'img/radhi.png',
+                size: new google.maps.Size(25, 40),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(12.5, 40)
             },
-          shape: {
-            coords: [1,25,-40,-25,1],
-            type: 'poly'
-          }  
+            shape: {
+                coords: [1, 25, -40, -25, 1],
+                type: 'poly'
+            }
         });
         // Push the marker to our array of markers.
         markers.push(marker);
@@ -167,12 +161,29 @@ function initMap() {
     map.fitBounds(bounds);
 
     // This function will loop through the listings and hide them all.
-}
+    }
+
+    else {
+        console.log("Maps are not loaded");
+        alert("Oops Cannot load Google Maps");
+
+        $(".options-box").css("width","100%");
+        $("#searchBtn").attr("disabled","disabled");
+        $("#hide-listngs").attr("disabled","disabled");
+
+    }
+
+  }  
 
 function populateInfoWindow(marker, infowindow) {
+   
     if (infowindow.marker != marker) {
         infowindow.marker = marker;
+        infowindow.close();
+         infowindow.marker = null;
         map.setCenter(marker.getPosition());
+
+        console.log("Subset pop lengh"+marker.getPosition());
         //For wiki links:
         var $body = $('body');
         var cityStr = marker.title;
@@ -213,11 +224,10 @@ function populateInfoWindow(marker, infowindow) {
             }
 
         });
-        //return false;
+       
         infowindow.open(map, marker);
         infowindow.addListener('closeclick', function() {
             infowindow.marker = null;
         });
     }
 }
-
