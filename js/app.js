@@ -194,6 +194,7 @@
              bounds.extend(markers[i].position);
          }
          map.fitBounds(bounds);
+
      };
 
      self.hideListings = function() {
@@ -203,10 +204,14 @@
          }
          map.fitBounds(null);
      };
-
+     var infy;
      self.showMarker = function() {
          console.log("Now show marker of " + this.subset());
-         var largeInfowindow = new google.maps.InfoWindow();
+         if(infy===undefined)
+         {
+             infy=new google.maps.InfoWindow();
+         }
+         var largeInfowindow = infy;//new google.maps.InfoWindow();
          var city = this.selected().title;
          var loc = this.subset();
          var subPosition;
