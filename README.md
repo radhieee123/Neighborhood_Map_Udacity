@@ -30,11 +30,11 @@
 #####		populateInfoWindow: It accepts the infowindow instance and marker as a parameter and generates the infowindow which includes the title itself, wikipedia link and location.
 #####		showInfo:	When the user click the city name or hits enter to text input after typing the city name, it generates the infowindow and jumps to the callback functions.This function takes the user selected city and search the nearby restaurants with radius of 6000 and generates the marker.
 
-		`self.service.nearbySearch({
+		```self.service.nearbySearch({
               location: self.serv(),
               radius: 6000,
               type: ['restaurants']
-            }, self.callback);`
+            }, self.callback);```
 #####		callback:  If the status is "OK"  then it is followed by restroMarker function.
 #####		restroMarker: It sets the position of marker and display the infowindow.
 
