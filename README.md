@@ -16,24 +16,33 @@
 
 #### The main javascript file which include:
 
-##### i) ViewModel
-##### ii) initMap function which initialzes the map
-##### iii) includes function like 
+####	 i) Knockout.js: include observable array and compputed arrays which binds and keeps track on what user have given input in the textbox. Accordingly, the computed array is prepared and shown in the listbox and also respective markers are shown.  
 
-#####		initMap:
-#####		populateInfoWindow:
-#####		showInfo:
-#####		callback:
-#####		restroMarker:
+####	ii)	Required Javascript API for Google Maps is included but not as observables they are bounded and displayed according to the user input in input text.
+
+####	iii) Wikipedia links: When the user clicks on marker, related wikipedia links are generated and shown.This is done with the help of Ajax request to the following URL:
+
+`var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + cityStr + '&format=json&callback=wikiCallback';`
+
+#### 	iii) includes function like 
+
+#####		initMap:	Initializes the map variable and set the zoom sizes and creates the marker for the locations given in the array named locations.
+#####		populateInfoWindow: It accepts the infowindow instance and marker as a parameter and generates the infowindow which includes the title itself, wikipedia link and location.
+#####		showInfo:	When the user click the city name or hits enter to text input after typing the city name, it generates the infowindow and jumps to the callback functions.This function takes the user selected city and search the nearby restaurants with radius of 6000 and generates the marker.
+
+		`self.service.nearbySearch({
+              location: self.serv(),
+              radius: 6000,
+              type: ['restaurants']
+            }, self.callback);`
+#####		callback:  If the status is "OK"  then it is followed by restroMarker function.
+#####		restroMarker: It sets the position of marker and display the infowindow.
 
 
 ### 2) index1.html
 
 #### 
 
-### Knockout.js
-
-####
 
 ### Google Map API Services
 
