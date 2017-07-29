@@ -10,6 +10,7 @@
 
 ### ii) Open the index1.html in browser.
 
+## Project Includes:
 
 ### 1) App.js
 
