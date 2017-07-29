@@ -1,15 +1,40 @@
 # Neighborhood Map Udacity Project
 
-## How to Load?
+## How to Use?
 
-### Open index1.html in Browser and select your fav places accordingly. Click on the markers for wikipedia links.
+### Open index1.html in Browser and select your fav places accordingly from the given input box. Click on the markers for wikipedia links. Note that, if you want to know the foodie places you will have to select/click the place from the listbox.
 
-## Javascript
+## How to Load ?
 
-### 1) Mapper.js
+### i) Insert your google Map API Key in the <script> bottom of the index1.html.
 
-####  Consist of the Google API map functions such as showPlaces and Hidelistings. Also in populateinfoWindow it sends AJAX request to the wikipedia links.
+### ii) Open the index1.html in browser.
 
-### 2) App.js
 
-#### Consists of location array and the ViewModel which handles the data show in the index1.html.
+### 1) App.js
+
+#### The main javascript file which include:
+
+##### i) ViewModel
+##### ii) initMap function which initialzes the map
+##### iii) includes function like 
+
+#####		initMap:
+#####		populateInfoWindow:
+#####		showInfo:
+#####		callback:
+#####		restroMarker:
+
+
+### 2) index1.html
+
+#### 
+
+### Knockout.js
+
+####
+
+### Google Map API Services
+
+####
+

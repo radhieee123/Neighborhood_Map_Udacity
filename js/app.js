@@ -85,12 +85,15 @@ var ViewModel = function() {
     self.newLocation=ko.observableArray(locations);
     self.newLoc=ko.observableArray([]);
    // self.result1=ko.observableArray([]);
-
+   this.serv=ko.observable("");
 
    /*The Map Things*/
     this.map = null;
     this.markers = [];
     this.largeInfowindow=null;
+    this.service=null;
+
+
 
 
 
@@ -249,9 +252,46 @@ var ViewModel = function() {
                     self.populateInfoWindow(self.markers[i],self.largeInfowindow);
                 }
             }
+            for(var i=0;i<locations.length;i++)
+            {
+                if(title.title===locations[i].title)
+                {
+                    self.serv(locations[i].location);
+                }
+            }
+            self.service = new google.maps.places.PlacesService(self.map);
+            self.service.nearbySearch({
+              location: self.serv(),
+              radius: 6000,
+              type: ['restaurants']
+            }, self.callback);
         };
 
+        self.callback=function(results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+              for (var i = 0; i < results.length; i++) {
+                self.restroMarker(results[i]);
+              }
+            }
+        }
 
+        self.restroMarker=function(place) {
+           // console.log("Yo restroo");
+            //var restroLoc = place.geometry.location;
+            var marker = new google.maps.Marker({
+                map: self.map,
+                title:place.name,
+
+            position: place.geometry.location
+            });
+                google.maps.event.addListener(marker, 'click', function() {
+                self.populateInfoWindow(marker,self.largeInfowindow);
+                });
+
+               if (this.map.getZoom()){
+                    this.map.setZoom(13);
+                 }
+        }
     };
 
 
@@ -262,24 +302,7 @@ var ViewModel = function() {
     ko.applyBindings(new ViewModel());
 };
 
-     /*function populateInfoWindow(marker, infowindow) {
-   
-    if (infowindow.marker != marker) {
-        infowindow.marker = marker;
-        infowindow.close();
-         infowindow.marker = null;
-        map.setCenter(marker.getPosition());
-
-        var cityStr = marker.title;
-        //var cityStr=$("#hidden").val();
-        var $wikiElem = $('#wikipedia-links');
-        // clear out old data before new request
-        $wikiElem.text("");
-        console.log("This is " + marker.title);
-        var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + cityStr + '&format=json&callback=wikiCallback';
-        var wikiRequestTimeout = setTimeout(function() {
-            $wikiElem.text("failed to load wiki resources");
-        }, 8000);
+     /*
 
         $.ajax({
             url: wikiUrl,
